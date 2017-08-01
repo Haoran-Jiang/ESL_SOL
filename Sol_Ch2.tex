@@ -1,0 +1,600 @@
+\batchmode
+\makeatletter
+\def\input@path{{\string"/Users/Haoran/Desktop/Statistical Learning/ESL/\string"}}
+\makeatother
+\documentclass[english]{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\setlength{\parindent}{0bp}
+\usepackage{color}
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{babel}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+\title{Chapter 2 Solution}
+
+\author{Haoran Jiang}
+
+\maketitle
+Ex. 2.1 \vspace{0.5cm}
+
+Suppose each of K-classes has an associated target $t_{k}$, which
+is a vector of all zeros, except a one in the $k$th position. Show
+that classifying to the largest element of $\hat{y}$ amounts to choosing
+the closest target, $\min_{k}||t_{k}-\hat{y}||$ , if the elements
+of $\hat{y}$ sum to one.
+
+\vspace{0.5cm}
+
+Sol (Weatherwax): 
+
+\begin{align*}
+\arg\min_{k}||t_{k}-\hat{y}|| & =\arg\min_{k}\sum_{i=1}^{K}(t_{k(i)}-\hat{y}_{i})^{2}\\
+ & =\arg\min_{k}\sum_{i=1}^{K}t_{k(i)}^{2}-2t_{k(i)}\hat{y}_{i}+\hat{y}_{i}^{2}\\
+ & =\arg\min_{k}\sum_{i=1}^{K}-2t_{k(i)}\hat{y}_{i}\\
+ & =\arg\min_{k}-2\hat{y}_{k}\\
+ & =\arg\max_{k}\hat{y}_{k}
+\end{align*}
+
+So, for any $K$-dimensional vector $\hat{y}$, the $k$ for which
+$\hat{y}_{k}$ is largest coincides with the $k$ for which $t_{k}$
+is nearest to $\hat{y}$.
+
+\vspace{0.5cm}
+
+Ex. 2.2
+
+\vspace{0.5cm}
+
+Show how to compute the Bayes decision boundary for the simulation
+example in Figure 2.5.
+
+\vspace{0.5cm}
+
+Sol:
+
+The Bayes Boundary is defined as the equation of equality between
+the two probabilities:
+
+\begin{align*}
+\Pr(g=\mathrm{Blue}|X) & =\Pr(g=\mathrm{Orange}|X)
+\end{align*}
+
+\vspace{0.5cm}
+
+Ex. 2.3
+
+\vspace{0.5cm}
+
+Derive equation (2.24).
+
+\vspace{0.5cm}
+
+Sol:
+
+Let $r_{i}$ denote $||x_{i}||$. Since the volume of the $p$ dimensional
+ball of radius $r$ is proportional to $r^{p}$, the Probability Density
+Function (PDF) of $r_{i}$ is 
+\begin{align*}
+f_{r_{i}}(r) & =\begin{cases}
+\frac{1}{p}r^{p-1} & 0\leq r\leq1\\
+0 & \mathrm{o.w}
+\end{cases}
+\end{align*}
+
+Let $d$denote the $\min(r_{1},r_{2},\cdots,r_{N})$. By order statistic
+formula, we can get the PDF of $d$,
+
+\begin{alignat*}{1}
+f_{d}(x) & =\begin{cases}
+\frac{N}{p}x^{p-1}(1-x^{p})^{N-1} & 0\leq x\leq1\\
+0 & \mathrm{o.w}
+\end{cases}
+\end{alignat*}
+
+The median distance from the origin to the closest data point solve
+the equation
+\[
+\int_{0}^{d}\frac{N}{p}x^{p-1}(1-x^{p})^{N-1}=\frac{1}{2}
+\]
+
+The left side of the equation is 
+\[
+1-(1-d^{p})^{N}
+\]
+
+So we get the final solution: 
+\[
+d(p,N)=(1-\frac{1}{2}^{1/N})^{1/p}
+\]
+
+\vspace{0.5cm}
+
+Ex. 2.4
+
+\vspace{0.5cm}
+
+The edge effect problem discussed on page 23 is not peculiar to uniform
+sampling from bounded domains. Consider inputs drawn from spherical
+multinormal distribution $X\sim N(0,\mathbf{I}_{p})$. The squared
+distance from any sample point to the origin has a $\chi_{p}^{2}$
+distribution with mean $p$. Consider a prediction point $x_{0}$
+drawn from this distribution, and let $a=\frac{x_{0}}{||x_{0}||}$
+be associated unit vector. Let $z_{i}=a^{T}x_{i}$ be the projection
+of each of the training points on this direction.
+
+Show that the $z_{i}$ are distributed $N(0,1)$ with expected squared
+distance from the origin 1, while the target point has expected squared
+distance $p$ from the origin.
+
+Hence for $p=10$, a randomly drawn test point is about $3.1$ standard
+deviations from the origin, while all the training points are on average
+one standard deviation along direction $a$. So most prediction points
+see themselves as lying on the edge of the training set.
+
+\vspace{0.5cm}
+
+Sol:
+
+Since $x_{i}\sim N(0,\mathbf{I}_{p})$ , $z_{i}=a^{T}x_{i}$ follows
+the Normal distribution. 
+
+\begin{align*}
+E(z_{i}) & =E(a^{T}x_{i})=a^{T}E(x_{i})=a^{T}0=0\\
+Var(z_{i}) & =Var(a^{T}x_{i})=a^{T}Var(x_{i})a=a^{T}a=1
+\end{align*}
+
+\vspace{0.5cm}
+
+Ex. 2.5
+
+\vspace{0.5cm}
+
+(a) Derive equation (2.27). The last line makes use of (3.8) through
+a conditioning argument.
+
+\vspace{0.5cm}
+
+Sol:
+
+\begin{align*}
+\mathrm{EPE}(x_{0}) & =\mathrm{E}_{y_{0}|x_{0}}\mathrm{E}_{\mathcal{T}}(y_{0}-\hat{y}_{0})^{2}\\
+ & =\mathrm{E}_{y_{0}|x_{0}}\mathrm{E}_{\mathcal{T}}(x_{0}^{T}\beta+\epsilon-x_{0}^{T}\hat{\beta})^{2}\\
+ & =\mathrm{E}_{y_{0}|x_{0}}\mathrm{E}_{\mathcal{T}}(x_{0}^{T}\beta+\epsilon-x_{0}^{T}(\boldsymbol{X}^{T}\boldsymbol{X})^{-1}\boldsymbol{X}^{T}(\boldsymbol{X}\beta+\overrightarrow{\epsilon}))^{2}\\
+ & =\mathrm{E}_{y_{0}|x_{0}}\mathrm{E}_{\mathcal{T}}(\epsilon-x_{0}^{T}(\boldsymbol{X}^{T}\boldsymbol{X})^{-1}\boldsymbol{X}^{T}\overrightarrow{\epsilon})^{2}\\
+ & =\mathrm{E}_{y_{0}|x_{0}}\mathrm{E}_{\mathcal{T}}(\epsilon^{2}-2\epsilon x_{0}^{T}(\boldsymbol{X}^{T}\boldsymbol{X})^{-1}\boldsymbol{X}^{T}\overrightarrow{\epsilon}+x_{0}^{T}(\boldsymbol{X}^{T}\boldsymbol{X})^{-1}\boldsymbol{X}^{T}\overrightarrow{\epsilon}\overrightarrow{\epsilon}^{T}\boldsymbol{X}(\boldsymbol{X}^{T}\boldsymbol{X})^{-1}x_{0})\\
+ & =\mathrm{E}_{y_{0}|x_{0}}(\epsilon^{2}+\sigma^{2}x_{0}^{T}\mathrm{E}_{\mathcal{T}}(\boldsymbol{X}^{T}\boldsymbol{X})^{-1}x_{0})\\
+ & =\sigma^{2}+\sigma^{2}x_{0}^{T}\mathrm{E}_{\mathcal{T}}(\boldsymbol{X}^{T}\boldsymbol{X})^{-1}x_{0}
+\end{align*}
+
+\vspace{0.5cm}
+
+(b) Derive equation (2.28), making use of the cyclic property of the
+trace operator {[}$\mathrm{trace}(AB)=\mathrm{trace}(BA)${]}, and
+its linearity (which allows us to interchange the order of trace and
+expectation).
+
+\vspace{0.5cm}
+
+Sol:
+
+If $N$ is large and $\mathcal{T}$ were selected at random, and assuming
+$\mathrm{E}(X)=0$, then $\boldsymbol{X}^{T}\boldsymbol{X}\rightarrow N\mathrm{Cov}(X)$
+and
+
+\begin{align*}
+\mathrm{E}_{x_{0}}\mathrm{EPE}(x_{0}) & \sim\sigma^{2}+\sigma^{2}\mathrm{E}_{x_{0}}x_{0}^{T}(N\mathrm{Cov}(X))^{-1}x_{0}\\
+ & =\sigma^{2}+\frac{\sigma^{2}}{N}\mathrm{Tr}(\mathrm{E}_{x_{0}}x_{0}^{T}\mathrm{Cov}(X)^{-1}x_{0})\\
+ & =\sigma^{2}+\frac{\sigma^{2}}{N}\mathrm{E}_{x_{0}}(\mathrm{Tr}(x_{0}^{T}\mathrm{Cov}(X)^{-1}x_{0}))\\
+ & =\sigma^{2}+\frac{\sigma^{2}}{N}\mathrm{E}_{x_{0}}(\mathrm{Tr}(x_{0}x_{0}^{T}\mathrm{Cov}(X)^{-1}))\\
+ & =\sigma^{2}+\frac{\sigma^{2}}{N}\mathrm{Tr}(\mathrm{Cov}(x_{0})\mathrm{Cov}(X)^{-1})\\
+ & =\sigma^{2}+\frac{p}{N}\sigma^{2}
+\end{align*}
+
+\vspace{0.5cm}
+
+Ex. 2.6
+
+\vspace{0.5cm}
+
+Consider a regression problem with inputs $x_{i}$ and outputs $y_{i}$,
+and a parameterized model $f_{\theta}(x)$ to be fit by least squares.
+Show that if there are observations with tied or identical values
+of $x$, then the fit can be obtained from a reduced weighted least
+squares problem.
+
+\vspace{0.5cm}
+
+Sol:
+
+\vspace{0.5cm}
+
+Ex. 2.7
+
+\vspace{0.5cm}
+
+Suppose we have a sample of $N$ pairs $x_{i}$ , $y_{i}$ drawn i.i.d.
+from the distribution characterized as follows:
+
+\begin{align*}
+x_{i} & \sim h(x),\ \mathrm{the\ design\ density}\\
+y_{i} & =f(x_{i})+\epsilon_{i},\ f\ \mathrm{is\ the\ regression\ function}\\
+\epsilon_{i} & \sim(0,\ \sigma^{2})\ (\mathrm{mean\ zero,\ variance\ \sigma^{2})}
+\end{align*}
+
+We construct an estimator for $f$ linear in the $y_{i}$,
+
+\[
+\hat{f}(x_{0})=\sum_{i=1}^{N}l_{i}(x_{0};\chi)y_{i},
+\]
+
+where the weights $l_{i}(x_{0};\chi)$ do not depend on the $y_{i}$,
+but do depend on the entire training sequence of $x_{i}$, denoted
+here by $\chi$.
+
+\vspace{0.5cm}
+
+(a) Show that linear regression and $k$-nearest-neighbor regression
+are members of this class of estimators. Describe explicitly the weights
+$l_{i}(x_{0};\chi)$ in each of these cases.
+
+\vspace{0.5cm}
+
+Sol:
+
+For the linear regression:
+
+\begin{align*}
+\hat{f}(x_{0}) & =x_{0}^{T}\hat{\beta}\\
+ & =x_{0}^{T}(\boldsymbol{X}^{T}\boldsymbol{X})^{-1}\boldsymbol{X}^{T}\boldsymbol{y}\\
+ & =\sum_{i=1}^{N}x_{i}^{T}(\boldsymbol{X}^{T}\boldsymbol{X})^{-1}x_{0}y_{i}\\
+ & =\sum_{i=1}^{N}l_{i}(x_{0};\chi)y_{i},
+\end{align*}
+
+where $l_{i}(x_{0};\chi)=x_{i}^{T}(\boldsymbol{X}^{T}\boldsymbol{X})^{-1}x_{0}$
+.
+
+For the $k$ - nearest-neighbor regression:
+
+\begin{align*}
+\hat{f}(x_{0}) & =\frac{1}{k}\sum_{x_{i}\in N_{k}(x_{0})}y_{i}\\
+ & =\sum_{i=1}^{N}l_{i}(x_{0};\chi)y_{i},
+\end{align*}
+
+where $l_{i}(x_{0};\chi)=\frac{1}{k}I(x_{i}\in N_{k}(x_{0}))$.
+
+\vspace{0.5cm}
+
+(b) Decompose the conditional mean-squared error 
+\[
+\mathrm{E}_{\mathcal{Y}|\mathcal{X}}(f(x_{0})-\hat{f}(x_{0}))^{2}
+\]
+
+into a squared bias and a variance component.
+
+\vspace{0.5cm}
+
+Sol:
+
+\begin{align*}
+\mathrm{E}_{\mathcal{Y}|\mathcal{X}}(f(x_{0})-\hat{f}(x_{0}))^{2} & =\mathrm{E}_{\mathcal{Y}|\mathcal{X}}(f(x_{0})-\mathrm{E}_{\mathcal{Y}|\mathcal{X}}(\hat{f}(x_{0})+\mathrm{E}_{\mathcal{Y}|\mathcal{X}}(\hat{f}(x_{0})-\hat{f}(x_{0}))^{2}\\
+ & =\mathrm{E}_{\mathcal{Y}|\mathcal{X}}(f(x_{0})-\mathrm{E}_{\mathcal{Y}|\mathcal{X}}(\hat{f}(x_{0}))^{2}+\mathrm{E}_{\mathcal{Y}|\mathcal{X}}(\mathrm{E}_{\mathcal{Y}|\mathcal{X}}(\hat{f}(x_{0})-\hat{f}(x_{0}))^{2}\\
+ & \ \ \ +{\color{red}2\mathrm{E}_{\mathcal{Y}|\mathcal{X}}((f(x_{0})-\mathrm{E}_{\mathcal{Y}|\mathcal{X}}(\hat{f}(x_{0}))(\mathrm{E}_{\mathcal{Y}|\mathcal{X}}\hat{f}(x_{0})-\hat{f}(x_{0})))}\\
+ & =(f(x_{0})-\mathrm{E}_{\mathcal{Y}|\mathcal{X}}(\hat{f}(x_{0}))^{2}+\mathrm{E}_{\mathcal{Y}|\mathcal{X}}(\mathrm{E}_{\mathcal{Y}|\mathcal{X}}(\hat{f}(x_{0}))-\hat{f}(x_{0}))^{2}\\
+ & =\mathrm{Bias}_{\mathcal{Y}|\mathcal{X}}^{2}(\hat{f}(x_{0}))+\mathrm{Var}_{\mathcal{Y}|\mathcal{X}}(\hat{f}(x_{0}))
+\end{align*}
+
+It is not hard to prove the cross product part (the \textcolor{red}{red}
+part) is zero.
+
+\vspace{0.5cm}
+
+(c) Decompose the (unconditional) mean-squared error 
+\[
+\mathrm{E}_{\mathcal{Y},\mathcal{X}}(f(x_{0})-\hat{f}(x_{0}))^{2}
+\]
+
+into a squared bias and a variance component.
+
+\vspace{0.5cm}
+
+Sol:
+
+\begin{align*}
+\mathrm{E}_{\mathcal{Y},\mathcal{X}}(f(x_{0})-\hat{f}(x_{0}))^{2} & =\mathrm{E}_{\mathcal{Y},\mathcal{X}}(f(x_{0})-\mathrm{E}_{\mathcal{Y},\mathcal{X}}(\hat{f}(x_{0}))+\mathrm{E}_{\mathcal{Y},\mathcal{X}}(\hat{f}(x_{0}))-\hat{f}(x_{0}))^{2}\\
+ & =\mathrm{E}_{\mathcal{Y},\mathcal{X}}(f(x_{0})-\mathrm{E}_{\mathcal{Y},\mathcal{X}}(\hat{f}(x_{0}))^{2}+\mathrm{E}_{\mathcal{Y},\mathcal{X}}(\mathrm{E}_{\mathcal{Y}|,X}(\hat{f}(x_{0})-\hat{f}(x_{0}))^{2}\\
+ & \ \ \ +{\color{red}2\mathrm{E}_{\mathcal{Y},\mathcal{X}}((f(x_{0})-\mathrm{E}_{\mathcal{Y}|,X}(\hat{f}(x_{0}))(\mathrm{E}_{\mathcal{Y},X}\hat{f}(x_{0})-\hat{f}(x_{0})))}\\
+ & =(f(x_{0})-\mathrm{E}_{\mathcal{Y},\mathcal{X}}(\hat{f}(x_{0}))^{2}+\mathrm{E}_{\mathcal{Y},\mathcal{X}}(\mathrm{E}_{\mathcal{Y},\mathcal{X}}(\hat{f}(x_{0}))-\hat{f}(x_{0}))^{2}\\
+ & =\mathrm{Bias}_{\mathcal{Y},\mathcal{X}}^{2}(\hat{f}(x_{0}))+\mathrm{Var}_{\mathcal{Y},\mathcal{X}}(\hat{f}(x_{0}))
+\end{align*}
+
+Like part b, it is not hard to prove the cross product part (the \textcolor{red}{red}
+part) is zero.
+
+\vspace{0.5cm}
+
+(d) Establish a relationship between the squared biases and variance
+in the above two cases.
+
+\vspace{0.5cm}
+
+Sol:
+
+By Law of Total Expectation, we have 
+\[
+\mathrm{E}_{\mathcal{Y},\mathcal{X}}(f(x_{0})-\hat{f}(x_{0}))^{2}=\mathrm{E}_{\mathcal{X}}(\mathrm{E}_{\mathcal{Y}|\mathcal{X}}(f(x_{0})-\hat{f}(x_{0}))^{2})
+\]
+
+Further, we can get 
+\[
+\mathrm{Bias}_{\mathcal{Y},\mathcal{X}}^{2}(\hat{f}(x_{0}))+\mathrm{Var}_{\mathcal{Y},\mathcal{X}}(\hat{f}(x_{0}))=\mathrm{E}_{\mathcal{X}}(\mathrm{Bias}_{\mathcal{Y}|\mathcal{X}}^{2}(\hat{f}(x_{0}))+\mathrm{Var}_{\mathcal{Y}|\mathcal{X}}(\hat{f}(x_{0})))
+\]
+
+Now, let's look at this equation in details.
+
+\begin{align*}
+\mathrm{Bias}_{\mathcal{Y},\mathcal{X}}^{2}(\hat{f}(x_{0}) & =(f(x_{0})-\mathrm{E}_{\mathcal{Y},\mathcal{X}}(\hat{f}(x_{0}))^{2}\\
+ & =(f(x_{0})-\mathrm{E_{\mathcal{X}}}\mathrm{E}_{\mathcal{Y}|\mathcal{X}}(\hat{f}(x_{0}))^{2}\\
+ & =(f(x_{0})-\mathrm{E}_{\mathcal{X}}\sum_{i=1}^{N}l_{i}(x_{0};\mathcal{X})f(x_{i}))^{2}\\
+ & =(\mathrm{E}_{\mathcal{X}}(f(x_{0})-\sum_{i=1}^{N}l_{i}(x_{0};\mathcal{X})f(x_{i})))^{2}\\
+ & \leq\mathrm{E}_{\mathcal{X}}((f(x_{0})-\sum_{i=1}^{N}l_{i}(x_{0};\mathcal{X})f(x_{i}))^{2}\\
+ & =\mathrm{E}_{\mathcal{X}}(f(x_{0})-\mathrm{E}_{\mathcal{Y}|\mathcal{X}}(\hat{f}(x_{0}))^{2}\\
+ & =\mathrm{E}_{\mathcal{X}}\mathrm{Bias}_{\mathcal{Y}|\mathcal{X}}(\hat{f}(x_{0}))^{2}
+\end{align*}
+
+We can achieve the relationship between the squared biases and variances:
+
+\begin{align*}
+\mathrm{Bias}_{\mathcal{Y},\mathcal{X}}^{2}(\hat{f}(x_{0}) & \leq\mathrm{E}_{\mathcal{X}}\mathrm{Bias}_{\mathcal{Y}|\mathcal{X}}(\hat{f}(x_{0}))^{2}\\
+\mathrm{Var}_{\mathcal{Y},\mathcal{X}}(\hat{f}(x_{0})) & \geq\mathrm{E}_{\mathcal{X}}\mathrm{Var}_{\mathcal{Y}|\mathcal{X}}(\hat{f}(x_{0}))
+\end{align*}
+
+\vspace{0.5cm}
+
+Ex. 2.8
+
+\vspace{0.5cm}
+
+Compare the classification performance of linear regression and $k$
+- nearest neighbor classification on the zip code data. In particular,
+consider only the 2's and 3's and $k=1,\ 3,\ 5,\ 7,\ \mathrm{and}\ 15.$
+Show both the training and test error for each choice. The zip code
+data are available from the book website \url{http://web.stanford.edu/~hastie/ElemStatLearn/}
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Data Loading}
+\hlkwd{setwd}\hlstd{(}\hlstr{"~/Desktop/Statistical Learning/ESL/zip_code/"}\hlstd{)}
+\hlstd{zip_train} \hlkwb{=} \hlkwd{read.csv}\hlstd{(}\hlkwc{file} \hlstd{=} \hlstr{"zip_train.csv"}\hlstd{,}\hlkwc{sep} \hlstd{=} \hlstr{""}\hlstd{,}\hlkwc{header} \hlstd{= F)}
+\hlstd{zip_test} \hlkwb{=} \hlkwd{read.csv}\hlstd{(}\hlkwc{file} \hlstd{=} \hlstr{"zip_test.csv"}\hlstd{,} \hlkwc{sep} \hlstd{=} \hlstr{""}\hlstd{,} \hlkwc{header} \hlstd{= F)}
+\hlkwd{colnames}\hlstd{(zip_train)} \hlkwb{=} \hlkwd{c}\hlstd{(}\hlstr{"y"}\hlstd{,} \hlkwd{paste0}\hlstd{(}\hlstr{"x"}\hlstd{,} \hlnum{1}\hlopt{:}\hlnum{256}\hlstd{))}
+\hlkwd{colnames}\hlstd{(zip_test)} \hlkwb{=} \hlkwd{c}\hlstd{(}\hlstr{"y"}\hlstd{,}\hlkwd{paste0}\hlstd{(}\hlstr{"x"}\hlstd{,}\hlnum{1}\hlopt{:}\hlnum{256}\hlstd{))}
+\hlstd{zip_train_filter} \hlkwb{=} \hlkwd{subset}\hlstd{(zip_train, zip_train}\hlopt{$}\hlstd{y} \hlopt{==} \hlnum{2}\hlopt{|}\hlstd{zip_train}\hlopt{$}\hlstd{y} \hlopt{==} \hlnum{3}\hlstd{)}
+\hlstd{zip_test_filter} \hlkwb{=} \hlkwd{subset}\hlstd{(zip_test, zip_test}\hlopt{$}\hlstd{y} \hlopt{==} \hlnum{2}\hlopt{|}\hlstd{zip_test}\hlopt{$}\hlstd{y} \hlopt{==} \hlnum{3}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Linear Regression Classification}
+\hlstd{LR} \hlkwb{=} \hlkwd{lm}\hlstd{(y}\hlopt{~}\hlstd{., zip_train_filter)}
+\hlstd{LR_predict_train} \hlkwb{=} \hlkwd{data.frame}\hlstd{(}\hlkwc{y} \hlstd{=} \hlkwd{ifelse}\hlstd{(}\hlkwd{predict}\hlstd{(LR,zip_train_filter)}\hlopt{>=}\hlnum{2.5}\hlstd{,}\hlnum{3}\hlstd{,}\hlnum{2}\hlstd{))}
+\hlstd{LR_predict_test} \hlkwb{=} \hlkwd{data.frame}\hlstd{(}\hlkwc{y} \hlstd{=} \hlkwd{ifelse}\hlstd{(}\hlkwd{predict}\hlstd{(LR, zip_test_filter)}\hlopt{>=}\hlnum{2.5}\hlstd{,}\hlnum{3}\hlstd{,}\hlnum{2}\hlstd{))}
+
+\hlcom{# Accurate Rate for Training Data}
+\hlkwd{sum}\hlstd{(LR_predict_train} \hlopt{==} \hlstd{zip_train_filter}\hlopt{$}\hlstd{y)}\hlopt{/}\hlstd{(}\hlkwd{dim}\hlstd{(LR_predict_train)[}\hlnum{1}\hlstd{])}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.9942405
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Accurate Rate for Test Data}
+\hlkwd{sum}\hlstd{(LR_predict_test} \hlopt{==} \hlstd{zip_test_filter}\hlopt{$}\hlstd{y)}\hlopt{/}\hlstd{(}\hlkwd{dim}\hlstd{(LR_predict_test)[}\hlnum{1}\hlstd{])}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.9587912
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# KNN Classification}
+\hlkwd{library}\hlstd{(}\hlstr{'class'}\hlstd{)}
+
+\hlcom{# Function for Accurate Rate Calculation}
+\hlstd{knn_acc} \hlkwb{=} \hlkwa{function}\hlstd{(}\hlkwc{k}\hlstd{,} \hlkwc{train} \hlstd{= zip_train_filter,} \hlkwc{test} \hlstd{= zip_test_filter)\{}
+                        \hlstd{knn_model} \hlkwb{=} \hlkwd{knn}\hlstd{(}\hlkwc{train} \hlstd{= train[,}\hlopt{-}\hlnum{1}\hlstd{],} \hlkwc{test} \hlstd{= test[,}\hlopt{-}\hlnum{1}\hlstd{],}
+                                                        \hlkwc{cl} \hlstd{= train}\hlopt{$}\hlstd{y, k)}
+                        \hlstd{len} \hlkwb{=} \hlkwd{dim}\hlstd{(test)[}\hlnum{1}\hlstd{]}
+                        \hlkwd{return}\hlstd{(}\hlkwc{acc} \hlstd{=} \hlkwd{sum}\hlstd{(knn_model} \hlopt{==} \hlstd{test}\hlopt{$}\hlstd{y)}\hlopt{/}\hlstd{len)}
+\hlstd{\}}
+
+\hlcom{# K = 1 Train Accurate Rate}
+\hlkwd{knn_acc}\hlstd{(}\hlnum{1}\hlstd{,} \hlkwc{test} \hlstd{= zip_train_filter)}
+\end{alltt}
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+\begin{alltt}
+\hlcom{# K = 1 Test Accurate Rate}
+\hlkwd{knn_acc}\hlstd{(}\hlnum{1}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.9752747
+\end{verbatim}
+\begin{alltt}
+\hlcom{# K = 3 Train Accurate Rate}
+\hlkwd{knn_acc}\hlstd{(}\hlnum{3}\hlstd{,} \hlkwc{test} \hlstd{= zip_train_filter)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.9949604
+\end{verbatim}
+\begin{alltt}
+\hlcom{# K = 3 Test Accurate Rate}
+\hlkwd{knn_acc}\hlstd{(}\hlnum{3}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.9697802
+\end{verbatim}
+\begin{alltt}
+\hlcom{# K = 5 Train Accurate Rate}
+\hlkwd{knn_acc}\hlstd{(}\hlnum{5}\hlstd{,} \hlkwc{test} \hlstd{= zip_train_filter)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.9942405
+\end{verbatim}
+\begin{alltt}
+\hlcom{# K = 5 Test Accurate Rate}
+\hlkwd{knn_acc}\hlstd{(}\hlnum{5}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.9697802
+\end{verbatim}
+\begin{alltt}
+\hlcom{# K = 7 Train Accurate Rate}
+\hlkwd{knn_acc}\hlstd{(}\hlnum{7}\hlstd{,} \hlkwc{test} \hlstd{= zip_train_filter)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.9935205
+\end{verbatim}
+\begin{alltt}
+\hlcom{# K = 7 Test Accurate Rate}
+\hlkwd{knn_acc}\hlstd{(}\hlnum{7}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.967033
+\end{verbatim}
+\begin{alltt}
+\hlcom{# K = 15 Train Accurate Rate}
+\hlkwd{knn_acc}\hlstd{(}\hlnum{15}\hlstd{,} \hlkwc{test} \hlstd{= zip_train_filter)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.9906407
+\end{verbatim}
+\begin{alltt}
+\hlcom{# K = 15 Test Accurate Rate}
+\hlkwd{knn_acc}\hlstd{(}\hlnum{15}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.9615385
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\vspace{0.5cm}
+
+Ex. 2.9
+
+\vspace{0.5cm}
+
+Consider a linear regression model with $p$ parameters, fit by least
+squares to a set of training data $(x_{1},\ y_{1}),\cdots,(x_{N},\ y_{N})$
+drawn at random from a population. Let $\hat{\beta}$ be the least
+squares estimate. Suppose we have some test data $(\tilde{x}_{1},\tilde{y}_{1}),\cdots,(\tilde{x}_{M},\tilde{y}_{M})$
+drawn at random from the same population as the training data. If
+$R_{tr}(\beta)=\frac{1}{N}\sum_{i=1}^{N}(y_{i}-x_{i}^{T}\beta)^{2}$
+and $R_{te}(\beta)=\frac{1}{M}\sum_{i=1}^{M}(\tilde{y}_{i}-\tilde{x}_{i}^{T}\beta)^{2}$,
+prove that 
+\[
+\mathrm{E}[R_{tr}(\hat{\beta})]=\mathrm{E}[R_{te}(\hat{\beta})],
+\]
+
+where the expectations are over all that is random in each expression. 
+
+\vspace{0.5cm}
+
+Sol:
+
+To simplify analysis, I make a strong assumption here:
+\[
+y=x^{T}\beta+\epsilon,
+\]
+
+where $\mathrm{E}(\epsilon|x)=0,\ \mathrm{Var(\epsilon)=\sigma^{2}}$.
+
+\begin{align*}
+R_{tr}(\hat{\beta}) & =\frac{1}{N}(Y-X\hat{\beta})^{T}(Y-X\hat{\beta})\\
+ & =\frac{1}{N}(Y-X(X^{T}X)^{-1}X^{T}Y)^{T}(Y-X(X^{T}X)^{-1}X^{T}Y)\\
+ & =\frac{1}{N}(\epsilon^{T}\epsilon-\epsilon^{T}X(X^{T}X)^{-1}X^{T}\epsilon)
+\end{align*}
+
+Since $X(X^{T}X)^{-1}X^{T}$ is a symmetric matrix (semi-definite),
+$\epsilon^{T}X(X^{T}X)^{-1}X^{T}\epsilon\geq0$. 
+\begin{align*}
+\mathrm{E}(R_{tr}(\hat{\beta})) & =\mathrm{E}(\frac{1}{N}(\epsilon^{T}\epsilon-\epsilon^{T}X(X^{T}X)^{-1}X^{T}\epsilon))\\
+ & \leq\mathrm{E}(\frac{1}{N}\epsilon^{T}\epsilon)\\
+ & =\sigma^{2}
+\end{align*}
+
+\begin{align*}
+R_{te}(\hat{\beta}) & =\frac{1}{M}(\tilde{Y}-\tilde{X}\hat{\beta})^{T}(\tilde{Y}-\tilde{X}\hat{\beta})\\
+ & =\frac{1}{M}(\tilde{X}\beta+\tilde{\epsilon}-\tilde{X}(X^{T}X)^{-1}X^{T}(X\beta+\epsilon))^{T}(\tilde{X}\beta+\tilde{\epsilon}-\tilde{X}(X^{T}X)^{-1}X^{T}(X\beta+\epsilon))\\
+ & =\frac{1}{M}(\tilde{\epsilon}-\tilde{X}(X^{T}X)^{-1}X^{T}\epsilon)^{T}(\tilde{\epsilon}-\tilde{X}(X^{T}X)^{-1}X^{T}\epsilon)
+\end{align*}
+
+\begin{align*}
+\mathrm{E}R_{te}(\hat{\beta}) & =\mathrm{E}(\frac{1}{M}(\tilde{\epsilon}-\tilde{X}(X^{T}X)^{-1}X^{T}\epsilon)^{T}(\tilde{\epsilon}-\tilde{X}(X^{T}X)^{-1}X^{T}\epsilon))\\
+ & =\frac{1}{M}\mathrm{E}(\tilde{\epsilon}^{T}\tilde{\epsilon})+\frac{1}{M}\mathrm{E}(\epsilon^{T}X(X^{T}X)^{-1}\tilde{X}^{T}\tilde{X}(X^{T}X)^{-1}X^{T}\epsilon)\\
+ & \geq\frac{1}{M}\mathrm{E}(\tilde{\epsilon}^{T}\tilde{\epsilon})\\
+ & =\sigma^{2}
+\end{align*}
+
+Q.E.D
+\end{document}
